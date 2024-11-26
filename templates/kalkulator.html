@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KALKULATOR PYTHON | raflynurihvandi</title>
+    <style>
+        *{
+            font-family: "JuanMikes";
+        }
+        .kotak-luar{
+            background-color: rgb(234, 73, 248);
+            width: 400px;
+            margin-top: 20px;
+            border: 2.5px solid black;
+            border-radius: 5px;
+            padding: 4px;
+        }
+        .kotak-angka{
+            background-color: rgb(246, 209, 255);
+            text-align: right;
+            padding: 5px;
+            margin-bottom: 4px;
+            border-radius: 5px;
+            border: 1px solid rgb(221, 221, 221);
+            box-shadow: 0px 0px 20px -3px rgba(0,0,0,0.1);
+        }
+        .isi{
+            font-size: 40px;
+        }
+        .baris-1,
+        .baris-2,
+        .baris-3,
+        .baris-4,
+        .baris-5{
+            display: flex;
+            margin-top: 4px;
+        }
+        .tombol{
+            font-size: 30px;
+        }
+        .clear,
+        .bagi,
+        .angka-1,
+        .angka-2,
+        .angka-3,
+        .angka-4,
+        .angka-5,
+        .angka-6,
+        .angka-7,
+        .angka-8,
+        .angka-9,
+        .kali,
+        .bagi,
+        .kurang,
+        .tambah,
+        .hasil,
+        .titik,
+        .nol{
+            background-color: rgb(223, 27, 230);
+            border: 1px solid rgb(236, 236, 236);
+            border-radius: 5px;
+            box-shadow: 0px 0px 20px -3px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .bagi,
+        .kali,
+        .kurang,
+        .tambah,
+        .hasil{
+            width: 96px;
+        }
+        .angka-1,
+        .angka-2,
+        .angka-3,
+        .angka-4,
+        .angka-5,
+        .angka-6,
+        .angka-7,
+        .angka-8,
+        .angka-9,
+        .titik{
+            width: 96px;
+            margin-right: 4px;
+        }
+        .clear{
+            width: 302px;
+            margin-right: 4px;
+        }
+        .nol{
+            width: 198px;
+            margin-right: 4px;
+        }
+        .copy{
+            margin-top: 20px;
+        }
+        .bck{
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #da1cca;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .bck:hover {
+            background-color: #d600d6;
+            color: #f1f1f1;
+            box-shadow: 0 6px 8px rgba(129, 2, 123, 0.2);
+            transform: translateY(-2px);
+        }
+        .bck:active {
+            background-color: #700070;
+            transform: translateY(2px);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 style="margin-bottom: 25px;">KALKULATOR PYTHON</h1>
+        <h1></h1>
+        <div class="kotak-luar">
+            <div class="kotak-angka">
+                {% if hsl is not none %}
+                    <span class="isi" id="isi">{{ hsl }}</span>
+                {% endif %}
+                <span class="isi" id="isi">&nbsp;</span>
+            </div>
+            <div class="tombol">
+                <div class="baris-1">
+                    <div class="clear" onclick="clr()">
+                        <span class="tombol">CLEAR</span>
+                    </div>
+                    <div class="bagi" onclick="bagi()">
+                        <span class="tombol">/</span>
+                    </div>
+                </div>
+                <div class="baris-2">
+                    <div class="angka-7" onclick="tuju()">
+                        <span class="tombol">7</span>
+                    </div>
+                    <div class="angka-8" onclick="delapan()">
+                        <span class="tombol">8</span>
+                    </div>
+                    <div class="angka-9" onclick="sembilan()">
+                        <span class="tombol">9</span>
+                    </div>
+                    <div class="kali" onclick="kali()">
+                        <span class="tombol">x</span>
+                    </div>
+                </div>
+                <div class="baris-3">
+                    <div class="angka-4" onclick="empat()">
+                        <span class="tombol">4</span>
+                    </div>
+                    <div class="angka-5" onclick="lima()">
+                        <span class="tombol">5</span>
+                    </div>
+                    <div class="angka-6" onclick="enam()">
+                        <span class="tombol">6</span>
+                    </div>
+                    <div class="kurang" onclick="kurang()">
+                        <span class="tombol">-</span>
+                    </div>
+                </div>
+                <div class="baris-4">
+                    <div class="angka-1" onclick="satu()">
+                        <span class="tombol">1</span>
+                    </div>
+                    <div class="angka-2" onclick="dua()">
+                        <span class="tombol">2</span>
+                    </div>
+                    <div class="angka-3" onclick="tiga()">
+                        <span class="tombol">3</span>
+                    </div>
+                    <div class="tambah" onclick="tambah()">
+                        <span class="tombol">+</span>
+                    </div>
+                </div>
+                <div class="baris-5">
+                    <div class="nol" onclick="nol()">
+                        <span class="tombol">0</span>
+                    </div>
+                    <div class="titik" onclick="titik()">
+                        <span class="tombol">.</span>
+                    </div>
+                    <div class="hasil" onclick="hasil()">
+                        <span class="tombol">=</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>{{ ncopy }}</h3>
+        <a href="/" class="bck">Home</a><br><br>
+        <a href="/pengalihan">Jangan diklik</a>
+        <form style="display: none;" action="/kalkulator" method="POST">
+            <input type="number" id="a1" name="angka_pertama">
+            <input type="text" id="op" name="operator">
+            <input type="number" id="a2" name="angka_kedua">
+            <button type="submit" id="sm"></button>
+        </form>
+    </center> 
+    <script>
+        var val1
+        var val2
+        var nil1
+        var nil2
+        var operator
+        var ttk = false
+
+        function clr(){
+            val1 = null
+            operator = null
+            val2 = null
+            document.getElementById('isi').innerHTML = "&nbsp"
+            ttk = false
+        }
+        function titik(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "."
+                    document.getElementById('isi').innerHTML = val1
+                    ttk = true
+                } else {
+                    val1 += "."
+                    document.getElementById('isi').innerHTML = val1
+                    ttk = true
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "."
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                    ttk = true
+                } else {
+                    val2 += "."
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                    ttk = true
+                }
+            }
+        }
+        function nol(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "0"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "0"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "0"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "0"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function satu(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "1"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "1"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "1"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "1"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function dua(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "2"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "2"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "2"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "2"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function tiga(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "3"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "3"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "3"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "3"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function empat(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "4"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "4"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "4"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "4"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function lima(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "5"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "5"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "5"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "5"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function enam(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "6"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "6"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "6"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "6"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function tuju(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "7"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "7"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "7"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "7"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function delapan(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "8"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "8"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "8"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "8"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function sembilan(){
+            if (operator == null) {
+                if (val1 == null) {
+                    val1 = "9"
+                    document.getElementById('isi').innerHTML = val1
+                } else {
+                    val1 += "9"
+                    document.getElementById('isi').innerHTML = val1
+                }
+            } else {
+                if (val2 == null) {
+                    val2 = "9"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                } else {
+                    val2 += "9"
+                    document.getElementById('isi').innerHTML = val1+operator+val2
+                }
+            }
+        }
+        function bagi() {
+            operator = "/"
+            document.getElementById('isi').innerHTML = val1+operator
+        }
+        function kali() {
+            operator = "x"
+            document.getElementById('isi').innerHTML = val1+operator
+        }
+        function kurang() {
+            operator = "-"
+            document.getElementById('isi').innerHTML = val1+operator
+        }
+        function tambah() {
+            operator = "+"
+            document.getElementById('isi').innerHTML = val1+operator
+        }
+        function hasil() {
+            document.getElementById('a1').value = val1
+            document.getElementById('op').value = operator
+            document.getElementById('a2').value = val2
+            document.getElementById('sm').click()
+            val1 = null
+            val2 = null
+            hsl = null
+            operator = null
+            ttk = false
+        }
+    </script>
+</body>
+</html>
